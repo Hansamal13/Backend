@@ -1,27 +1,46 @@
-//pass= p189cmBDBfsXPqoj
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import artRoutes from './Route/artRoute.js';
 
-const express = require("express");
-const mongoose = require("mongoose");
-const UserRoute = require("./Routes/UserRoute");
-const workshopRoutes = require('./Routes/workshopRoutes');
+// Load environment variables
+dotenv.config();
 
 const app = express();
-const cors = require("cors");
 
-
-//Middleware
-app.use(express.json());
+// Middleware
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use("/users",UserRoute);
-app.use("/workshops", workshopRoutes);
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
-mongoose.connect("mongodb+srv://admin:p189cmBDBfsXPqoj@cluster0.aja2e.mongodb.net/")
-.then(()=> console.log("Connected to MongoDB"))
-.then(()=> {
-    app.listen(5000);
-})
-.catch((err)=> console.log((err)));
+// Routes
+app.use('/art', artRoutes);
 
+// Root route
+app.get('/', (req, res) => {
+  res.send('Art Gallery API is running');
+});
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    success: false,
+    message: 'Something went wrong',
+    error: process.env.NODE_ENV === 'development' ? err.message : null
+  });
+});
 
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+export default app;
