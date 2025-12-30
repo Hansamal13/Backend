@@ -4,7 +4,6 @@ const router = express.Router();
 //Insert model
 const User = require("../Model/UserModel");
 
-
 // Add this to your Express.js backend routes file (e.g., userRoutes.js)
 
 // POST route for user login
@@ -63,14 +62,6 @@ router.post('/login', async (req, res) => {
       });
     }
   });
-
-
-
-
-
-
-
-
 
 
 //insert user controller
