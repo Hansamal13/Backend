@@ -1,6 +1,4 @@
-
 const User = require("../Model/UserModel");
-
 const getAllUsers = async (req,res,next) => {
 
     let users;
@@ -9,10 +7,8 @@ const getAllUsers = async (req,res,next) => {
         users = await User.find();
 
     } catch (error) {
-        console.log(err);
-        
+        console.log(err);     
     }
-
     // not found
 
     if(!users){
@@ -22,13 +18,10 @@ const getAllUsers = async (req,res,next) => {
     //display 
 
     return res.status(200).json({users});
-
-
 };
 
 
 //data insert
-
 const addUsers = async(req, res, next) =>{
 
     const {Fname,Lname,Email_address,ContactNumber,Address,Password,ProfilePhotod} = req.body;
