@@ -8,7 +8,6 @@ const Artist = require("../Model/ArtistModel");
 const ArtistControler = require("../Controlers/ArtistControler");
 
 router.get("/",ArtistControler.getAllArtist);
-
 router.post("/", ArtistControler.addArtists);
 router.get("/:id", ArtistControler.getById);
 router.put("/:id", ArtistControler.updateArtists);
