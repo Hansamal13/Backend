@@ -59,6 +59,7 @@ const addWorkshops = async (req, res) => {
     
     };
 
+
     //Update workshop details
     const updateWorkshop = async (req, res, next) => {
         const id = req.params.id;
@@ -79,13 +80,13 @@ const addWorkshops = async (req, res) => {
         }
         return res.status(200).json({ Workshops });
     };
-    
+
+
     //Delete workshop details
     const deleteWorkshop = async (req, res, next) => {
         const id = req.params.id;
     
         let Workshops;
-    
         try {
             Workshops = await Workshop.findByIdAndDelete(id)
         } catch (err) {
@@ -98,10 +99,10 @@ const addWorkshops = async (req, res) => {
         return res.status(200).json({ Workshops });
     }
 
-
 exports.getAllWorkshops = getAllWorkshops;
 exports.addWorkshops = addWorkshops;
 exports.getById = getById;
 exports.updateWorkshop = updateWorkshop;
 exports.deleteWorkshop = deleteWorkshop;
+
 
