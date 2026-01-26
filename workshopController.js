@@ -1,5 +1,4 @@
 const Workshop = require('../Model/Workshop');
-
 // Get All Workshops
 const getAllWorkshops = async (req, res, next) => {
 
@@ -104,5 +103,6 @@ exports.addWorkshops = addWorkshops;
 exports.getById = getById;
 exports.updateWorkshop = updateWorkshop;
 exports.deleteWorkshop = deleteWorkshop;
+
 
 
